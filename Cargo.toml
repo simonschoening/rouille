@@ -11,15 +11,16 @@ keywords = ["web", "framework", "http", "rest"]
 categories = ["web-programming::http-server", "web-programming::websocket"]
 
 [features]
-default = ["gzip", "brotli"]
+default = ["gzip", "brotli", "match_assets"]
 gzip = ["deflate"]
 ssl = ["tiny_http/ssl"]
+match_assets = ["filetime"]
 
 [dependencies]
 base64 = "0.13"
 brotli = { version = "3.3.2", optional = true }
 chrono = { version = "0.4.19", default-features = false }
-filetime = "0.2.0"
+filetime = { version = "0.2.0", optional = true }
 deflate = { version = "0.9", optional = true, features = ["gzip"] }
 multipart = { version = "0.18", default-features = false, features = ["server"] }
 percent-encoding = "2"

@@ -10,6 +10,7 @@
 use std::fs;
 use std::path::Path;
 
+#[cfg(feature = "match_assets")]
 use filetime;
 use time;
 
@@ -77,6 +78,7 @@ use Response;
 /// In this example, a request made to `/static/test.txt` will return the file
 /// `public/test.txt` if it exists.
 ///
+#[cfg(feature = "match_assets")]
 pub fn match_assets<P: ?Sized>(request: &Request, path: &P) -> Response
 where
     P: AsRef<Path>,
