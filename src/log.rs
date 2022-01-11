@@ -7,12 +7,14 @@
 // notice may not be copied, modified, or distributed except
 // according to those terms.
 
+use std::convert::TryInto;
 use std::io::Write;
 use std::panic;
 use std::time::Duration;
 use std::time::Instant;
+use std::time::SystemTime;
 
-use chrono;
+use chrono::{TimeZone, Utc};
 
 use Request;
 use Response;
@@ -43,10 +45,17 @@ where
     W: Write,
     F: FnOnce() -> Response,
 {
+    let duration = SystemTime::now()
+        .duration_since(SystemTime::UNIX_EPOCH)
+        .expect("SystemTime before UNIX EPOCH!");
+    let now = Utc.timestamp(
+        duration.as_secs().try_into().unwrap(),
+        duration.subsec_nanos(),
+    );
     let start_instant = Instant::now();
     let rq_line = format!(
         "{} UTC - {} {}",
-        chrono::Utc::now().format("%Y-%m-%d %H:%M:%S%.6f"),
+        now.format("%Y-%m-%d %H:%M:%S%.6f"),
         rq.method(),
         rq.raw_url()
     );
