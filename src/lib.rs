@@ -62,6 +62,7 @@ extern crate brotli;
 extern crate chrono;
 #[cfg(feature = "gzip")]
 extern crate deflate;
+#[cfg(feature = "match_assets")]
 extern crate filetime;
 extern crate multipart;
 extern crate rand;
