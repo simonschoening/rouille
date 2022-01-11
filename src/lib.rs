@@ -91,6 +91,7 @@ pub const DEFAULT_ENCODE_SET: &percent_encoding::AsciiSet = &percent_encoding::C
     .add(b'}');
 
 pub use assets::extension_to_mime;
+#[cfg(feature = "match_assets")]
 pub use assets::match_assets;
 pub use log::{log, log_custom};
 pub use response::{Response, ResponseBody};
